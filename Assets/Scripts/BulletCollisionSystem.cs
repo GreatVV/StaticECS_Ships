@@ -2,37 +2,26 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-internal class BulletCollisionSystem : IUpdateSystem
+internal class BulletCollisionSystem<Tag1, Tag2> : IUpdateSystem where Tag1 : struct, ITag where Tag2 : struct ,ITag
 {
     public void Update()
     {
-        foreach (var bulletEntity in W.QueryEntities.For<All<Bullet, Position, Team>>())
+        foreach (var bulletEntity in W.QueryEntities.For<All<Bullet, Position>, TagAll<Tag1>>())
         {
             var bulletView = bulletEntity.Ref<Bullet>().View;
             var position = bulletEntity.Ref<Position>().Value;
-            var team = bulletEntity.Ref<Team>().Id;
-            foreach (var otherEntity in W.QueryEntities.For<All<Team, Position>, None<Bullet>>())
+            foreach (var otherEntity in W.QueryEntities.For<All<Position>, None<Bullet>, TagAll<Tag2>>())
             {
-                if (otherEntity.Ref<Team>().Id != team)
+                var enemyPosition = otherEntity.Ref<Position>().Value;
+                if (math.distancesq(position, enemyPosition) < bulletView.Radius)
                 {
-                    var enemyPosition = otherEntity.Ref<Position>().Value;
-                    if (math.distancesq(position, enemyPosition) < bulletView.Radius)
+                    otherEntity.TryAdd<Hits>().Items.Add(new HitInfo()
                     {
-                        otherEntity.TryAdd<Hits>().Items.Add(new HitInfo()
-                        {
-                            From = bulletEntity.Pack(),
-                            Damage = bulletView.Damage
-                        });
-                    }
+                        From = bulletEntity.Pack(),
+                        Damage = bulletView.Damage
+                    });
                 }
             }
         }
     }
-}
-
-public struct Team : IComponent
-{
-    public int Id;
-    public const int Enemy = 2;
-    public const int Player = 1;
 }

@@ -50,7 +50,8 @@ public class Game : MonoBehaviour
         S.AddUpdate(new DelaySystem());
         S.AddUpdate(new SpawnEnemySystem());
         S.AddUpdate(new EnemyLogicSystem());
-        S.AddUpdate(new BulletCollisionSystem());
+        S.AddUpdate(new BulletCollisionSystem<PlayerTag, EnemyTag>());
+        S.AddUpdate(new BulletCollisionSystem<EnemyTag, PlayerTag>());
         S.AddUpdate(new HitAnalyzeSystem());
         S.AddUpdate(new SyncPositionToTransformSystem());
         S.AddUpdate(new DestroyBulletSystem());
