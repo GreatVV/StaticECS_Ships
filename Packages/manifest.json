@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "com.felid-force-studios.static-ecs": "https://github.com/Felid-Force-Studios/StaticEcs.git",
+    "com.felid-force-studios.static-ecs-unity": "https://github.com/Felid-Force-Studios/StaticEcs-Unity.git",
+    "com.unity.2d.sprite": "1.0.0",
+    "com.unity.2d.tilemap": "1.0.0",
+    "com.unity.2d.tilemap.extras": "4.1.0",
+    "com.unity.ide.rider": "3.0.36",
+    "com.unity.render-pipelines.universal": "17.0.4",
+    "com.unity.ugui": "2.0.0",
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.audio": "1.0.0",
+    "com.unity.modules.imageconversion": "1.0.0",
+    "com.unity.modules.imgui": "1.0.0",
+    "com.unity.modules.jsonserialize": "1.0.0",
+    "com.unity.modules.particlesystem": "1.0.0",
+    "com.unity.modules.screencapture": "1.0.0",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.modules.uielements": "1.0.0"
+  }
+}
