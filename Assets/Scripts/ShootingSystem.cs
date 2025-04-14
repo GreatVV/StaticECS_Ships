@@ -7,15 +7,15 @@ internal class ShootingSystem : IUpdateSystem
     {
         foreach (var entity in W.QueryEntities.For<All<Position, Direction, Shooting, Team>>())
         {
-            ref var shooting = ref entity.RefMut<Shooting>();
+            ref var shooting = ref entity.Ref<Shooting>();
             if (Time.time - shooting.LastShootingTime > shooting.Interval)
             {
-                var staticData = E.Context<StaticData>.Get();
+                var staticData = W.Context<StaticData>.Get();
                 var position = entity.Ref<Position>().Value;
                 var direction = entity.Ref<Direction>().Value;
              
                 var bulletView = Object.Instantiate(staticData.BulletView, position, Quaternion.FromToRotation(Vector3.up, direction));
-                var bulletEntity = E.Entity.New(new Bullet()
+                var bulletEntity = W.Entity.New(new Bullet()
                     {
                         View = bulletView
                     }, new Position()

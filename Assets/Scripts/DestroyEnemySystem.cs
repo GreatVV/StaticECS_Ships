@@ -12,14 +12,14 @@ internal class DestroyEnemySystem : IUpdateSystem
                 var waveInfoRef = waveRef.WaveInfoRef;
                 if (waveInfoRef.TryUnpack<WT>(out var waveEntity))
                 {
-                    ref var items = ref waveEntity.RefMut<SpawnedEnemiesForWave>().Items;
+                    ref var items = ref waveEntity.Ref<SpawnedEnemiesForWave>().Items;
                     
                     for (int i = items.Count - 1; i >= 0; i--)
                     {
                         var item = items[(ushort)i];
                         if (item.entity.Equals(e.Pack()))
                         {
-                            items.DeleteAt((ushort)i);
+                            items.RemoveAt((ushort)i);
                         }
                     }
 

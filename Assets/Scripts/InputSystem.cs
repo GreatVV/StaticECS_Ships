@@ -13,12 +13,12 @@ internal class InputSystem : IUpdateSystem
             var y = Input.GetAxis("Vertical");
             if (x != 0 || y != 0)
             {
-                entity.RefMut<Direction>().Value = math.normalize(new float3(x, y, 0));
-                entity.RefMut<Velocity>().Value = entity.Ref<Character>().View.Speed;
+                entity.Ref<Direction>().Value = math.normalize(new float3(x, y, 0));
+                entity.Ref<Velocity>().Value = entity.Ref<Character>().View.Speed;
             }
             else
             {
-                entity.RefMut<Velocity>().Value = 0;
+                entity.Ref<Velocity>().Value = 0;
             }
         }
     }

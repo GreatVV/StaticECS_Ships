@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
     public StaticData StaticData;
     void Start()
     {
-        E.Create(EcsConfig.Default());
+        W.Create(WorldConfig.Default());
         
         EcsDebug<WT>.AddWorld();
         
@@ -34,11 +34,11 @@ public class Game : MonoBehaviour
         W.RegisterMultiComponentType<SpawnedEnemiesForWave, EnemyRef>(10);
         W.RegisterMultiComponentType<Hits, HitInfo>(10);
         
-        E.Context<SceneData>.Set(SceneData);
-        E.Context<StaticData>.Set(StaticData);
+        W.Context<SceneData>.Set(SceneData);
+        W.Context<StaticData>.Set(StaticData);
         
         // Initializing the world
-        E.Initialize();
+        W.Initialize();
         
         // Creating systems
         S.Create();
@@ -70,6 +70,6 @@ public class Game : MonoBehaviour
     private void OnDestroy()
     {
         S.Destroy();
-        E.Destroy();
+        W.Destroy();
     }
 }

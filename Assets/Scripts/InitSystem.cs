@@ -6,11 +6,11 @@ internal class InitSystem : IInitSystem
 {
     public void Init()
     {
-        var staticData = E.Context<StaticData>.Get();
-        var sceneData = E.Context<SceneData>.Get();
+        var staticData = W.Context<StaticData>.Get();
+        var sceneData = W.Context<SceneData>.Get();
         var characterView = Object.Instantiate(staticData.CharacterView, sceneData.SpawnPosition.position,
             Quaternion.identity);
-        var playerEntity = E.Entity.New(new Character()
+        var playerEntity = W.Entity.New(new Character()
             {
                 View = characterView
             }, new Shooting
@@ -32,7 +32,7 @@ internal class InitSystem : IInitSystem
         playerEntity.Add<Team>().Id = Team.Player;
         playerEntity.Add<Health>().Immortal = true;
 
-        E.Entity.New(new WaveInfo()
+        W.Entity.New(new WaveInfo()
         {
             Waves = staticData.Waves
         });

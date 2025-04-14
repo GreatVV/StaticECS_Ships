@@ -10,15 +10,15 @@ internal class SpawnEnemySystem : IUpdateSystem
             var spawnEnemyEvent = entity.Ref<SpawnEnemyEvent>();
             if (spawnEnemyEvent.WaveEntity.TryUnpack<WT>(out var waveEntity))
             {
-                var sceneData = E.Context<SceneData>.Get();
+                var sceneData = W.Context<SceneData>.Get();
                 var position = sceneData.SpawnPosition.position +
                                (Vector3)Random.insideUnitCircle.normalized * sceneData.EnemySpawnRadius;
                 var enemy = Object.Instantiate(spawnEnemyEvent.Prefab,
                     position, Quaternion.identity);
                 
-                ref var items = ref waveEntity.RefMut<SpawnedEnemiesForWave>().Items;
+                ref var items = ref waveEntity.Ref<SpawnedEnemiesForWave>().Items;
 
-                var enemyEntity = E.Entity.New(new Enemy()
+                var enemyEntity = W.Entity.New(new Enemy()
                     {
                         View = enemy,
                     },
