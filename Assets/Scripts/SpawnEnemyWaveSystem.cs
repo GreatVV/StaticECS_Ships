@@ -8,7 +8,7 @@ internal class SpawnEnemyWaveSystem : IUpdateSystem
     {
         foreach (var entity in W.QueryEntities.For<All<WaveInfo>, None<SpawnedEnemiesForWave>>())
         {
-            ref var waveInfo = ref entity.RefMut<WaveInfo>();
+            ref var waveInfo = ref entity.Ref<WaveInfo>();
             var wave = waveInfo.Waves.WaveDescs[waveInfo.CurrentWave % waveInfo.Waves.WaveDescs.Length];
             var packedEntity = entity.Pack();
             foreach (var desc in wave.EnemySpawnDesc)
@@ -21,7 +21,7 @@ internal class SpawnEnemyWaveSystem : IUpdateSystem
                 delay.Value = wave.SpawnTime;
                 for (int i = 0; i < desc.Amount; i++)
                 {
-                    E.Entity.New(spawnEnemyEvent, delay);
+                    W.Entity.New(spawnEnemyEvent, delay);
                 }
                 
             }

@@ -8,7 +8,7 @@ internal class HitAnalyzeSystem : IUpdateSystem
         foreach (var e in W.QueryEntities.For<All<Hits, Health>>())
         {
             ref readonly var hits = ref e.Ref<Hits>();
-            ref var health = ref e.RefMut<Health>();
+            ref var health = ref e.Ref<Health>();
             foreach (var hitInfo in hits.Items)
             {
                 //Debug.Log($"Hit to {e} from {hitInfo.From} at {Time.frameCount}");

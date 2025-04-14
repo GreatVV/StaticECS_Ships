@@ -7,7 +7,7 @@ public class DelaySystem : IUpdateSystem
     {
         foreach (var entity in W.QueryEntities.For<All<Delay>>())
         {
-            ref var delay = ref entity.RefMut<Delay>();
+            ref var delay = ref entity.Ref<Delay>();
             delay.Value -= Time.deltaTime;
             if (delay.Value <= 0)
             {

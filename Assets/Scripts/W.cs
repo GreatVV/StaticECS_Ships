@@ -1,1 +1,3 @@
-﻿public abstract class W : E.World { }
+﻿using FFS.Libraries.StaticEcs;
+
+public abstract class W : World<WT> { }
